@@ -1,0 +1,17 @@
+from flask import Flask, render_template
+from flask_socketio import SocketIO
+
+app = Flask(_name_)
+socketio = SocketIO(app)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@socketio.on('message')
+def handle_message(msg):
+    print('Message: ' + msg)
+    socketio.emit('message', msg)
+
+if _name_ == '_main_':
+    socketio.run(app,debug =True)
